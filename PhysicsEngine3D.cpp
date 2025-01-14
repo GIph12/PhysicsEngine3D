@@ -8,9 +8,9 @@ int main() {
 	Vector3 b(1.0f, 4.0f, 5.0f);
 	
 
-	float result = a.Length();
+	Vector3 result = a.Normalize();
 
-	std::cout << "Result (x) : " << result << std::endl;
+	std::cout << "Result (x) : " << result.x << std::endl;
 
 
 
