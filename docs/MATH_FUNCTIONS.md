@@ -1,165 +1,157 @@
-# Math Functions Documentation
+# MyVector3 Class Documentation
 
-This document provides detailed information about the math functions included in the physics engine. These functions are used for 3D vector operations, including addition, subtraction, scaling, dot product etc.
-
-## Table of Contents
-- [MyVector3 Class](#myvector3-class)
-- [Vector Operations](#vector-operations)
-  - [Addition (`+`)](#addition-)
-  - [Subtraction (`-`)](#subtraction-)
-  - [Scalar Multiplication (`*`)](#scalar-multiplication-)
-  - [Scalar Division (`/`)](#scalar-division-)
-  - [Dot Product (`*`)](#dot-product-)
-  - [Cross Product](#cross-product)
-  - [Normalization](#normalization)
-  - [Length](#length)
+## Overview
+The `MyVector3` class is designed to represent and perform operations on three-dimensional vectors. It includes various operators and methods for vector arithmetic, scaling, normalization, and calculating vector properties such as length and dot products.
 
 ---
 
-## MyVector3 Class
-The `MyVector3` class represents a 3D vector with `x`, `y`, and `z` components.
+# MyVector3 Class Documentation
 
-### Constructor
+## Table of Contents
+1. [Overview](#overview)
+2. [Constructor](#constructor)
+3. [Operators](#operators)
+   - [Addition Operator (+)](#addition-operator-)
+   - [Subtraction Operator (-)](#subtraction-operator-)
+   - [Scalar Multiplication Operator (*)](#scalar-multiplication-operator-)
+   - [Scalar Division Operator (/)](#scalar-division-operator-)
+   - [Dot Product Operator (*)](#dot-product-operator-)
+4. [Methods](#methods)
+   - [Cross Product](#cross-product)
+   - [Normalize](#normalize)
+   - [Length](#length)
+5. [Example Usage](#example-usage)
+6. [Notes](#notes)
+7. [References](#references)
+
+---
+
+## Overview
+The `MyVector3` class is designed to represent and perform operations on three-dimensional vectors. It includes various operators and methods for vector arithmetic, scaling, normalization, and calculating vector properties such as length and dot products.
+
+---
+
+## Constructor
+
+### MyVector3(float x, float y, float z)
 ```cpp
 MyVector3(float x, float y, float z);
-Parameters:
+```
+- **Description**: Constructs a `MyVector3` object with the specified x, y, and z components.
+- **Parameters**:
+  - `x` (float): The x-component of the vector.
+  - `y` (float): The y-component of the vector.
+  - `z` (float): The z-component of the vector.
 
-x: The x-component of the vector.
+---
 
-y: The y-component of the vector.
+## Operators
 
-z: The z-component of the vector.
+### Addition Operator (+)
+```cpp
+MyVector3 MyVector3::operator+(const MyVector3& other) const;
+```
+- **Description**: Adds the current vector to another vector.
+- **Parameters**:
+  - `other` (const MyVector3&): The vector to add.
+- **Returns**: A new `MyVector3` representing the sum of the two vectors.
 
-Description: Initializes a new MyVector3 object with the specified components.
+### Subtraction Operator (-)
+```cpp
+MyVector3 MyVector3::operator-(const MyVector3& other) const;
+```
+- **Description**: Subtracts another vector from the current vector.
+- **Parameters**:
+  - `other` (const MyVector3&): The vector to subtract.
+- **Returns**: A new `MyVector3` representing the difference between the two vectors.
 
-Vector Operations
-Addition (+)
-cpp
-Copy
-MyVector3 operator+(const MyVector3& other) const;
-Parameters:
+### Scalar Multiplication Operator (*)
+```cpp
+MyVector3 MyVector3::operator*(float scalar) const;
+```
+- **Description**: Scales the vector by a scalar.
+- **Parameters**:
+  - `scalar` (float): The scalar to multiply by.
+- **Returns**: A new `MyVector3` representing the scaled vector.
 
-other: The vector to add.
+### Scalar Division Operator (/)
+```cpp
+MyVector3 MyVector3::operator/(float scalar) const;
+```
+- **Description**: Scales the vector by the reciprocal of a scalar.
+- **Parameters**:
+  - `scalar` (float): The scalar to divide by.
+- **Throws**: `std::runtime_error` if `scalar` is zero.
+- **Returns**: A new `MyVector3` representing the scaled vector.
 
-Return Value: A new MyVector3 object representing the sum of the two vectors.
+### Dot Product Operator (*)
+```cpp
+float MyVector3::operator*(const MyVector3& other) const;
+```
+- **Description**: Computes the dot product of the current vector and another vector.
+- **Parameters**:
+  - `other` (const MyVector3&): The vector to compute the dot product with.
+- **Returns**: A float representing the dot product of the two vectors.
 
-Example:
+---
 
-cpp
-Copy
-MyVector3 v1(1, 2, 3);
-MyVector3 v2(4, 5, 6);
-MyVector3 result = v1 + v2; // result = {5, 7, 9}
-Subtraction (-)
-cpp
-Copy
-MyVector3 operator-(const MyVector3& other) const;
-Parameters:
+## Methods
 
-other: The vector to subtract.
+### Cross Product
+```cpp
+MyVector3 MyVector3::Cross(const MyVector3& other) const;
+```
+- **Description**: Computes the cross product of the current vector and another vector.
+- **Parameters**:
+  - `other` (const MyVector3&): The vector to compute the cross product with.
+- **Returns**: A new `MyVector3` representing the cross product.
 
-Return Value: A new MyVector3 object representing the difference between the two vectors.
+### Normalize
+```cpp
+MyVector3 MyVector3::Normalize() const;
+```
+- **Description**: Normalizes the vector to unit length.
+- **Returns**: A new `MyVector3` representing the normalized vector.
+- **Notes**: If the vector has near-zero magnitude, the method returns a zero vector.
 
-Example:
+### Length
+```cpp
+float MyVector3::Length() const;
+```
+- **Description**: Computes the magnitude (length) of the vector.
+- **Returns**: A float representing the vector's magnitude.
 
-cpp
-Copy
-MyVector3 v1(1, 2, 3);
-MyVector3 v2(4, 5, 6);
-MyVector3 result = v1 - v2; // result = {-3, -3, -3}
-Scalar Multiplication (*)
-cpp
-Copy
-MyVector3 operator*(float scalar) const;
-Parameters:
+---
 
-scalar: The scalar value to multiply the vector by.
+## Example Usage
+```cpp
+#include <iostream>
+#include "MyVector3.h"
 
-Return Value: A new MyVector3 object representing the scaled vector.
+int main() {
+    MyVector3 v1(1.0f, 2.0f, 3.0f);
+    MyVector3 v2(4.0f, 5.0f, 6.0f);
 
-Example:
+    MyVector3 sum = v1 + v2; // Addition
+    MyVector3 difference = v1 - v2; // Subtraction
+    MyVector3 scaled = v1 * 2.0f; // Scaling
+    MyVector3 normalized = v1.Normalize(); // Normalization
+    float dotProduct = v1 * v2; // Dot product
+    MyVector3 crossProduct = v1.Cross(v2); // Cross product
 
-cpp
-Copy
-MyVector3 v(1, 2, 3);
-MyVector3 result = v * 2; // result = {2, 4, 6}
-Scalar Division (/)
-cpp
-Copy
-MyVector3 operator/(float scalar) const;
-Parameters:
+    std::cout << "Length of v1: " << v1.Length() << std::endl;
 
-scalar: The scalar value to divide the vector by.
+    return 0;
+}
+```
 
-Return Value: A new MyVector3 object representing the scaled vector.
+---
 
-Throws: std::runtime_error if scalar is zero.
+## Notes
+- The class assumes that floating-point precision is sufficient for operations.
+- Division by zero is explicitly checked and handled to avoid runtime errors.
+- Normalization gracefully handles vectors with near-zero magnitude by returning a zero vector.
 
-Example:
+---
 
-cpp
-Copy
-MyVector3 v(2, 4, 6);
-MyVector3 result = v / 2; // result = {1, 2, 3}
-Dot Product (*)
-cpp
-Copy
-float operator*(const MyVector3& other) const;
-Parameters:
 
-other: The vector to compute the dot product with.
-
-Return Value: A float representing the dot product of the two vectors.
-
-Example:
-
-cpp
-Copy
-MyVector3 v1(1, 2, 3);
-MyVector3 v2(4, 5, 6);
-float dot = v1 * v2; // dot = 32
-Cross Product
-cpp
-Copy
-MyVector3 Cross(const MyVector3& other) const;
-Parameters:
-
-other: The vector to compute the cross product with.
-
-Return Value: A new MyVector3 object representing the cross product of the two vectors.
-
-Example:
-
-cpp
-Copy
-MyVector3 v1(1, 0, 0);
-MyVector3 v2(0, 1, 0);
-MyVector3 result = v1.Cross(v2); // result = {0, 0, 1}
-Normalization
-cpp
-Copy
-MyVector3 Normalize() const;
-Return Value: A new MyVector3 object representing the normalized vector.
-
-Description: Normalizes the vector to have a length of 1. If the vector's length is near zero, returns a zero vector.
-
-Example:
-
-cpp
-Copy
-MyVector3 v(3, 4, 0);
-MyVector3 result = v.Normalize(); // result = {0.6, 0.8, 0}
-Length
-cpp
-Copy
-float Length() const;
-Return Value: A float representing the length (magnitude) of the vector.
-
-Example:
-
-cpp
-Copy
-MyVector3 v(3, 4, 0);
-float length = v.Length(); // length = 5
-Conclusion
-For more information about the physics engine, check out the README.
