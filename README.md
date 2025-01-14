@@ -17,7 +17,6 @@ The following documentation files are available in the `docs/` directory:
 
 ## Notes
 - The engine is designed for learning and experimentation, and is not optimized for production use.
-- Contributions and feedback are welcome to enhance its capabilities.
 
 
 
